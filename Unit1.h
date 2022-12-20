@@ -29,6 +29,7 @@ __published:	// IDE-managed Components
 	TButton *Button1;
 	TRichEdit *RichEdit1;
 	TIdMappedPortTCP *MITMProxy;
+	void __fastcall Button1Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);

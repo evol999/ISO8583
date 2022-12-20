@@ -100,6 +100,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'Start'
     TabOrder = 2
+    OnClick = Button1Click
   end
   object RichEdit1: TRichEdit
     Left = 24
