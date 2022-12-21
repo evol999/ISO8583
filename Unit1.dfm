@@ -119,6 +119,7 @@ object Form1: TForm1
   object MITMProxy: TIdMappedPortTCP
     Bindings = <>
     DefaultPort = 0
+    OnDisconnect = MITMProxyDisconnect
     OnBeforeConnect = MITMProxyBeforeConnect
     MappedPort = 0
     Left = 656

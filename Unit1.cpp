@@ -47,3 +47,16 @@ void __fastcall TForm1::MITMProxyBeforeConnect(TIdContext *AContext)
 }
 //---------------------------------------------------------------------------
 
+
+
+void __fastcall TForm1::MITMProxyDisconnect(TIdContext *AContext)
+{
+	String tempStr;
+
+	// displaying remote address.
+	tempStr = "Client disconnected"; TTextToDisplay *TextToDisplay =
+		new TTextToDisplay(tempStr); TextToDisplay->Synchronize();
+	delete TextToDisplay;
+}
+//---------------------------------------------------------------------------
+
