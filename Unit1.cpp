@@ -76,3 +76,10 @@ void __fastcall TForm1::MITMProxyConnect(TIdContext *AContext)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm1::DisplayChange(TObject *Sender)
+{
+	Display->SelStart = Display->GetTextLen(); Display->Perform(EM_SCROLLCARET,
+		0, 0);
+}
+//---------------------------------------------------------------------------
+

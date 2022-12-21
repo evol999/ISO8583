@@ -115,6 +115,7 @@ object Form1: TForm1
     ParentFont = False
     TabOrder = 3
     Zoom = 100
+    OnChange = DisplayChange
   end
   object MITMProxy: TIdMappedPortTCP
     Bindings = <>
