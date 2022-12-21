@@ -24,7 +24,7 @@ void __fastcall TTextToDisplay::AddStringList(TStringList* strings)
 	stringsToAdd = strings;
 }
 
-void __fastcall TTextToDisplay::DoSynchronize(){
+void __fastcall TTextToDisplay::DoNotify(){
 			// Use the input parameters here...
 		if (stringsToAdd)
 			Form1->Display->Lines->AddStrings(stringsToAdd);

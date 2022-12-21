@@ -6,13 +6,13 @@
 #include <System.hpp>
 #include <IdSync.hpp>
 #include "Unit1.h"
-class TTextToDisplay : public TIdSync {
+class TTextToDisplay : public TIdNotify {
 private:
 	String lineToAdd;
 	TStringList* stringsToAdd;
 
 protected:
-	virtual void __fastcall DoSynchronize();
+	virtual void __fastcall DoNotify();
 
 public:
 	__fastcall TTextToDisplay();

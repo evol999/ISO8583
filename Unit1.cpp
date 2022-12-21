@@ -44,7 +44,7 @@ void __fastcall TForm1::MITMProxyBeforeConnect(TIdContext *AContext)
 	tempStr = "Received connection from " +
 		AContext->Connection->Socket->Binding->PeerIP;
 	TTextToDisplay *TextToDisplay = new TTextToDisplay(tempStr);
-	TextToDisplay->Synchronize();
+	TextToDisplay->Notify();
 	delete TextToDisplay;
 }
 //---------------------------------------------------------------------------
@@ -57,7 +57,7 @@ void __fastcall TForm1::MITMProxyDisconnect(TIdContext *AContext)
 
 	// displaying remote address.
 /*	tempStr = "Client disconnected"; TTextToDisplay *TextToDisplay =
-		new TTextToDisplay(tempStr); TextToDisplay->Synchronize();
+		new TTextToDisplay(tempStr); TextToDisplay->Notify();
 	delete TextToDisplay;*/
 }
 //---------------------------------------------------------------------------
@@ -70,7 +70,7 @@ void __fastcall TForm1::MITMProxyConnect(TIdContext *AContext)
 	tempStr = "Attempting to connect to the remote server " +
 		MITMProxy->MappedHost + ":" + MITMProxy->MappedPort;
 	TTextToDisplay *TextToDisplay = new TTextToDisplay(tempStr);
-	TextToDisplay->Synchronize();
+	TextToDisplay->Notify();
 	delete TextToDisplay;
 
 }
