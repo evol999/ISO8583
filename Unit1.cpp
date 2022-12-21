@@ -39,11 +39,13 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 void __fastcall TForm1::MITMProxyBeforeConnect(TIdContext *AContext)
 {
 	String tempStr;
+
 	// displaying remote address.
 	tempStr = "Received connection from " +
 		AContext->Connection->Socket->Binding->PeerIP;
 	TTextToDisplay *TextToDisplay = new TTextToDisplay(tempStr);
-	TextToDisplay->Synchronize(); delete TextToDisplay;
+	TextToDisplay->Synchronize();
+	delete TextToDisplay;
 }
 //---------------------------------------------------------------------------
 
@@ -57,6 +59,20 @@ void __fastcall TForm1::MITMProxyDisconnect(TIdContext *AContext)
 	tempStr = "Client disconnected"; TTextToDisplay *TextToDisplay =
 		new TTextToDisplay(tempStr); TextToDisplay->Synchronize();
 	delete TextToDisplay;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::MITMProxyConnect(TIdContext *AContext)
+{
+	String tempStr;
+
+	// displaying remote address.
+	tempStr = "Attempting to connect to the remote server " +
+		MITMProxy->MappedHost + ":" + MITMProxy->MappedPort;
+	TTextToDisplay *TextToDisplay = new TTextToDisplay(tempStr);
+	TextToDisplay->Synchronize();
+	delete TextToDisplay;
+
 }
 //---------------------------------------------------------------------------
 
