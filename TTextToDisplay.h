@@ -16,6 +16,7 @@ protected:
 
 public:
 	__fastcall TTextToDisplay();
+	__fastcall TTextToDisplay(String str);
 	void __fastcall AddSingleLine(String str);
 	void __fastcall AddStringList(TStringList* strings);
 };

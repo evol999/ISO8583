@@ -10,6 +10,10 @@ TTextToDisplay::TTextToDisplay() {
 	lineToAdd = NULL;
 	stringsToAdd = NULL;
 }
+TTextToDisplay::TTextToDisplay(String str) {
+	lineToAdd = str;
+	stringsToAdd = NULL;
+}
 void __fastcall TTextToDisplay::AddSingleLine(String str)
 {
 	lineToAdd = str;

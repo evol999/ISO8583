@@ -4,6 +4,7 @@
 #pragma hdrstop
 
 #include "Unit1.h"
+#include "TTextToDisplay.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -32,6 +33,17 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 		Button1->Caption = "Start";
 
 	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::MITMProxyBeforeConnect(TIdContext *AContext)
+{
+	String tempStr;
+	// displaying remote address.
+	tempStr = "Received connection from " +
+		AContext->Connection->Socket->Binding->PeerIP;
+	TTextToDisplay *TextToDisplay = new TTextToDisplay(tempStr);
+	TextToDisplay->Synchronize(); delete TextToDisplay;
 }
 //---------------------------------------------------------------------------
 

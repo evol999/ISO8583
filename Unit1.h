@@ -12,6 +12,7 @@
 #include <IdCustomTCPServer.hpp>
 #include <IdMappedPortTCP.hpp>
 #include <Vcl.ComCtrls.hpp>
+#include <IdContext.hpp>
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {
@@ -30,6 +31,7 @@ __published:	// IDE-managed Components
 	TRichEdit *Display;
 	TIdMappedPortTCP *MITMProxy;
 	void __fastcall Button1Click(TObject *Sender);
+	void __fastcall MITMProxyBeforeConnect(TIdContext *AContext);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);
