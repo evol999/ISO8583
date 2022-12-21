@@ -102,7 +102,7 @@ object Form1: TForm1
     TabOrder = 2
     OnClick = Button1Click
   end
-  object RichEdit1: TRichEdit
+  object Display: TRichEdit
     Left = 24
     Top = 128
     Width = 529

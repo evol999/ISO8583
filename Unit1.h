@@ -27,7 +27,7 @@ __published:	// IDE-managed Components
 	TLabel *Label4;
 	TEdit *EditRemoteHostPort;
 	TButton *Button1;
-	TRichEdit *RichEdit1;
+	TRichEdit *Display;
 	TIdMappedPortTCP *MITMProxy;
 	void __fastcall Button1Click(TObject *Sender);
 private:	// User declarations

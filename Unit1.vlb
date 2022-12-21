@@ -22,9 +22,6 @@ Coordinates=10,10,44,58
 [Button1]
 Coordinates=155,155,59,58
 
-[RichEdit1]
-Coordinates=480,10,70,36
-
 [EditRemoteHostAddress]
 Coordinates=244,78,155,58
 Visible=True
@@ -40,4 +37,7 @@ Coordinates=73,78,118,58
 
 [MITMProxy]
 Coordinates=415,1,80,36
+
+[Display]
+Coordinates=480,10,70,36
 
