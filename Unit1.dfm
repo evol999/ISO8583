@@ -130,6 +130,7 @@ object Form1: TForm1
     OnDisconnect = MITMProxyDisconnect
     OnBeforeConnect = MITMProxyBeforeConnect
     MappedPort = 0
+    OnExecute = MITMProxyExecute
     Left = 656
     Top = 168
   end

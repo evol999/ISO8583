@@ -84,3 +84,65 @@ void __fastcall TForm1::DisplayChange(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+bool ReadMessageData(TIdBuffer *Buffer, int &Offset, TIdBytes &Data) {
+	// has enough bytes?
+	if ((Offset + 2) > Buffer->Size)
+		return false;
+
+	// read the length of the message from the first two bytes
+	UInt16 binLength = Buffer->ExtractToUInt16(Offset);
+
+	// converting from hex binary to hex string
+	String bcdLength = String().sprintf(_D("%04hx"), binLength);
+
+	// converting from hex string to int
+	int calculated_length = bcdLength.ToInt() - 2;
+
+	// has enough bytes?
+	if ((Offset + 2 + calculated_length) > Buffer->Size)
+		return false;
+
+	// reads data
+	Data.Length = calculated_length;
+	Buffer->ExtractToBytes(Data, calculated_length, false, Offset + 2);
+
+	Offset += (2 + calculated_length);
+	return true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::MITMProxyExecute(TIdContext *AContext)
+{
+	String sTemp;
+
+	TIdBuffer *Buffer = static_cast<TIdBuffer*>(AContext->Data);
+	Buffer->Write(static_cast<TIdMappedPortContext*>(AContext)->NetData);
+	Buffer->CompactHead();
+
+	TTextToDisplay *TextToDisplay = new TTextToDisplay;
+	CDecoder *Decoder = new CDecoder();
+	TStringList *slDecodedLines = NULL;
+	TIdBytes ucBuffer;
+	int offset = 0;
+	while (ReadMessageData(Buffer, offset, ucBuffer)) {
+		sTemp = String().sprintf(_D("%s"), ToHex(ucBuffer).c_str());
+		slDecodedLines = Decoder->formatInput(sTemp);
+		if(slDecodedLines)
+		{
+			TextToDisplay->AddStringList(slDecodedLines);
+			TextToDisplay->Notify();
+		}
+	}
+
+	// delete TextToDisplay;
+	delete Decoder;
+	delete slDecodedLines;
+
+	if (offset > 0)
+		Buffer->Remove(offset);
+
+
+}
+//---------------------------------------------------------------------------
+
+
