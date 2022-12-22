@@ -1,27 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2022/12/20 22:44:29.000.144,=C:\Embarcadero Projects\Unit1.cpp</Transaction>
     <Transaction>2022/12/20 22:44:29.000.009,=C:\Embarcadero Projects\Project2PCH1.h</Transaction>
-    <Transaction>2022/12/20 22:44:47.000.664,C:\Embarcadero Projects\Unit1.h=C:\ISO8583\Unit1.h</Transaction>
-    <Transaction>2022/12/20 22:44:47.000.664,C:\Embarcadero Projects\Unit1.dfm=C:\ISO8583\Unit1.dfm</Transaction>
-    <Transaction>2022/12/20 22:44:47.000.664,C:\Embarcadero Projects\Unit1.cpp=C:\ISO8583\Unit1.cpp</Transaction>
-    <Transaction>2022/12/20 22:44:49.000.548,C:\Embarcadero Projects\Project2PCH1.h=C:\ISO8583\Project2PCH1.h</Transaction>
-    <Transaction>2022/12/20 22:44:53.000.277,C:\Embarcadero Projects\Project2.cbproj=C:\ISO8583\Project2.cbproj</Transaction>
-    <Transaction>2022/12/20 22:46:23.000.922,C:\ISO8583\Crack ISO.cbproj=C:\ISO8583\Project2.cbproj</Transaction>
-    <Transaction>2022/12/20 22:46:23.000.909,C:\ISO8583\Crack ISOPCH1.h=C:\ISO8583\Project2PCH1.h</Transaction>
+    <Transaction>2022/12/20 22:44:29.000.144,=C:\Embarcadero Projects\Unit1.cpp</Transaction>
+    <Transaction>2022/12/20 22:44:47.000.664,C:\ISO8583\Unit1.cpp=C:\Embarcadero Projects\Unit1.cpp</Transaction>
+    <Transaction>2022/12/20 22:44:47.000.664,C:\ISO8583\Unit1.h=C:\Embarcadero Projects\Unit1.h</Transaction>
+    <Transaction>2022/12/20 22:44:47.000.664,C:\ISO8583\Unit1.dfm=C:\Embarcadero Projects\Unit1.dfm</Transaction>
+    <Transaction>2022/12/20 22:44:49.000.548,C:\ISO8583\Project2PCH1.h=C:\Embarcadero Projects\Project2PCH1.h</Transaction>
+    <Transaction>2022/12/20 22:44:53.000.277,C:\ISO8583\Project2.cbproj=C:\Embarcadero Projects\Project2.cbproj</Transaction>
+    <Transaction>2022/12/20 22:46:23.000.909,C:\ISO8583\Project2PCH1.h=C:\ISO8583\Crack ISOPCH1.h</Transaction>
+    <Transaction>2022/12/20 22:46:23.000.922,C:\ISO8583\Project2.cbproj=C:\ISO8583\Crack ISO.cbproj</Transaction>
     <Transaction>2022/12/20 22:46:41.000.165,C:\ISO8583\Crack ISO.cbproj=C:\ISO8583\Crack ISO.cbproj</Transaction>
     <Transaction>2022/12/20 23:24:12.000.581,C:\ISO8583\Crack ISO.cbproj=C:\ISO8583\Crack ISO.cbproj</Transaction>
     <Transaction>2022/12/20 23:33:00.000.116,=C:\ISO8583\Unit2.cpp</Transaction>
-    <Transaction>2022/12/20 23:33:59.000.903,C:\ISO8583\Unit2.cpp=C:\ISO8583\TAddTextToDisplay.cpp</Transaction>
-    <Transaction>2022/12/20 23:33:59.000.903,C:\ISO8583\Unit2.h=C:\ISO8583\TAddTextToDisplay.h</Transaction>
-    <Transaction>2022/12/20 23:49:21.000.702,C:\ISO8583\TAddTextToDisplay.h=C:\ISO8583\TAddTextToDisplay.h</Transaction>
+    <Transaction>2022/12/20 23:33:59.000.903,C:\ISO8583\TAddTextToDisplay.cpp=C:\ISO8583\Unit2.cpp</Transaction>
+    <Transaction>2022/12/20 23:33:59.000.903,C:\ISO8583\TAddTextToDisplay.h=C:\ISO8583\Unit2.h</Transaction>
     <Transaction>2022/12/20 23:49:21.000.702,C:\ISO8583\TAddTextToDisplay.cpp=C:\ISO8583\TAddTextToDisplay.cpp</Transaction>
+    <Transaction>2022/12/20 23:49:21.000.702,C:\ISO8583\TAddTextToDisplay.h=C:\ISO8583\TAddTextToDisplay.h</Transaction>
     <Transaction>2022/12/20 23:52:18.000.532,C:\ISO8583\TAddTextToDisplay.h=</Transaction>
     <Transaction>2022/12/20 23:52:37.000.328,=C:\ISO8583\Unit2.cpp</Transaction>
-    <Transaction>2022/12/20 23:53:11.000.574,C:\ISO8583\Unit2.h=C:\ISO8583\TAddTextToDisplay.h</Transaction>
-    <Transaction>2022/12/20 23:53:11.000.574,C:\ISO8583\Unit2.cpp=C:\ISO8583\TAddTextToDisplay.cpp</Transaction>
-    <Transaction>2022/12/21 00:16:33.000.650,C:\ISO8583\TAddTextToDisplay.cpp=C:\ISO8583\TTextToDisplay.cpp</Transaction>
-    <Transaction>2022/12/21 00:16:33.000.650,C:\ISO8583\TAddTextToDisplay.h=C:\ISO8583\TTextToDisplay.h</Transaction>
+    <Transaction>2022/12/20 23:53:11.000.574,C:\ISO8583\TAddTextToDisplay.h=C:\ISO8583\Unit2.h</Transaction>
+    <Transaction>2022/12/20 23:53:11.000.574,C:\ISO8583\TAddTextToDisplay.cpp=C:\ISO8583\Unit2.cpp</Transaction>
+    <Transaction>2022/12/21 00:16:33.000.650,C:\ISO8583\TTextToDisplay.cpp=C:\ISO8583\TAddTextToDisplay.cpp</Transaction>
+    <Transaction>2022/12/21 00:16:33.000.650,C:\ISO8583\TTextToDisplay.h=C:\ISO8583\TAddTextToDisplay.h</Transaction>
+    <Transaction>2022/12/21 22:37:55.000.987,=C:\ISO8583\Unit2.cpp</Transaction>
+    <Transaction>2022/12/21 22:38:12.000.146,C:\ISO8583\CDecoder.h=C:\ISO8583\Unit2.h</Transaction>
+    <Transaction>2022/12/21 22:38:12.000.146,C:\ISO8583\CDecoder.cpp=C:\ISO8583\Unit2.cpp</Transaction>
   </Transactions>
 </BorlandProject>

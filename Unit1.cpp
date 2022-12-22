@@ -5,6 +5,7 @@
 
 #include "Unit1.h"
 #include "TTextToDisplay.h"
+#include "CDecoder.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
