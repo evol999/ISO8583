@@ -35,6 +35,7 @@ __published:	// IDE-managed Components
 	void __fastcall MITMProxyDisconnect(TIdContext *AContext);
 	void __fastcall MITMProxyConnect(TIdContext *AContext);
 	void __fastcall DisplayChange(TObject *Sender);
+	void __fastcall MITMProxyExecute(TIdContext *AContext);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);
