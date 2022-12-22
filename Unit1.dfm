@@ -58,7 +58,7 @@ object Form1: TForm1
     Top = 16
     Width = 257
     Height = 97
-    Caption = 'GroupBox2'
+    Caption = 'Outgoing'
     TabOrder = 1
     object Label3: TLabel
       Left = 32
@@ -120,7 +120,11 @@ object Form1: TForm1
     OnChange = DisplayChange
   end
   object MITMProxy: TIdMappedPortTCP
-    Bindings = <>
+    Bindings = <
+      item
+        IP = '127.0.0.1'
+        Port = 8000
+      end>
     DefaultPort = 0
     OnConnect = MITMProxyConnect
     OnDisconnect = MITMProxyDisconnect
