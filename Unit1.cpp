@@ -59,6 +59,11 @@ void __fastcall TForm1::MITMProxyDisconnect(TIdContext *AContext)
 	// displaying remote address.
 	tempStr = "Client disconnected"; TTextToDisplay *TextToDisplay =
 		new TTextToDisplay(tempStr); TextToDisplay->Notify();
+
+	// release allocated buffer for the input data.
+	delete static_cast<TIdBuffer*>(AContext->Data);
+	AContext->Data = NULL;
+
 	// delete TextToDisplay;
 }
 //---------------------------------------------------------------------------
@@ -66,6 +71,9 @@ void __fastcall TForm1::MITMProxyDisconnect(TIdContext *AContext)
 void __fastcall TForm1::MITMProxyConnect(TIdContext *AContext)
 {
 	String tempStr;
+
+	// init Data to get buffer
+	AContext->Data = new TIdBuffer;
 
 	// displaying remote address.
 	tempStr = "Attempting to connect to the remote server " +
