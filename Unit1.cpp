@@ -80,7 +80,7 @@ void __fastcall TForm1::MITMProxyConnect(TIdContext *AContext)
 		MITMProxy->MappedHost + ":" + MITMProxy->MappedPort;
 	TTextToDisplay *TextToDisplay = new TTextToDisplay(tempStr);
 	TextToDisplay->Notify();
-	// delete TextToDisplay;
+	// delete TextToDisplay;*/
 
 }
 //---------------------------------------------------------------------------
@@ -128,7 +128,6 @@ void __fastcall TForm1::MITMProxyExecute(TIdContext *AContext)
 	Buffer->Write(static_cast<TIdMappedPortContext*>(AContext)->NetData);
 	Buffer->CompactHead();
 
-	TTextToDisplay *TextToDisplay = new TTextToDisplay;
 	CDecoder *Decoder = new CDecoder();
 	TStringList *slDecodedLines = NULL;
 	TIdBytes ucBuffer;
@@ -138,14 +137,22 @@ void __fastcall TForm1::MITMProxyExecute(TIdContext *AContext)
 		slDecodedLines = Decoder->formatInput(sTemp);
 		if(slDecodedLines)
 		{
+			// A new TextToDisplay object must be created everytime a Notify
+			// is to be executed because it destroys itself internally.
+			TTextToDisplay *TextToDisplay = new TTextToDisplay;
 			TextToDisplay->AddStringList(slDecodedLines);
 			TextToDisplay->Notify();
 		}
 	}
 
-	// delete TextToDisplay;
 	delete Decoder;
-	delete slDecodedLines;
+
+	// No need to delete TextToDisplay here it will destroy itself automatically
+	// delete TextToDisplay;
+
+	// Do not delete the slDecodedLines here because it will become NULL, no
+	// text will be "printed" and this will raise an exception.
+	// delete slDecodedLines;
 
 	if (offset > 0)
 		Buffer->Remove(offset);
