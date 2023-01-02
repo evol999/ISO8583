@@ -30,6 +30,7 @@ __published:	// IDE-managed Components
 	TButton *Button1;
 	TRichEdit *RawDataDisplay;
 	TIdMappedPortTCP *MITMProxy;
+	TRichEdit *DecodedDataDisplay;
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall MITMProxyBeforeConnect(TIdContext *AContext);
 	void __fastcall MITMProxyDisconnect(TIdContext *AContext);

@@ -119,6 +119,22 @@ object Form1: TForm1
     Zoom = 100
     OnChange = RawDataDisplayChange
   end
+  object DecodedDataDisplay: TRichEdit
+    Left = 24
+    Top = 304
+    Width = 529
+    Height = 145
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    HideScrollBars = False
+    ParentFont = False
+    ScrollBars = ssBoth
+    TabOrder = 4
+    Zoom = 100
+  end
   object MITMProxy: TIdMappedPortTCP
     Bindings = <
       item
