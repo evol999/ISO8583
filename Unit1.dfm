@@ -134,6 +134,7 @@ object Form1: TForm1
     ScrollBars = ssBoth
     TabOrder = 4
     Zoom = 100
+    OnChange = DecodedDataDisplayChange
   end
   object MITMProxy: TIdMappedPortTCP
     Bindings = <

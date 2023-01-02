@@ -126,6 +126,8 @@ void __fastcall TForm1::MITMProxyExecute(TIdContext *AContext)
 	int offset = 0;
 	while (ReadMessageData(Buffer, offset, ucBuffer)) {
 		sTemp = String().sprintf(_D("%s"), ToHex(ucBuffer).c_str());
+		TTextToDisplay *TextToDecodedDisplay = new TTextToDisplay(Form1->DecodedDataDisplay, sTemp);
+		TextToDecodedDisplay->Notify();
 		slDecodedLines = Decoder->formatInput(sTemp);
 		if(slDecodedLines)
 		{
@@ -166,6 +168,12 @@ void DisplayAutoScroll(TObject *Sender)
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::RawDataDisplayChange(TObject *Sender)
+{
+	DisplayAutoScroll(Sender);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::DecodedDataDisplayChange(TObject *Sender)
 {
 	DisplayAutoScroll(Sender);
 }
