@@ -44,7 +44,7 @@ void __fastcall TForm1::MITMProxyBeforeConnect(TIdContext *AContext)
 	// displaying remote address.
 	tempStr = "Received connection from " +
 		AContext->Connection->Socket->Binding->PeerIP;
-	TTextToDisplay *TextToDisplay = new TTextToDisplay(tempStr);
+	TTextToDisplay *TextToDisplay = new TTextToDisplay(Form1->RawDataDisplay, tempStr);
 	TextToDisplay->Notify();
 	// delete TextToDisplay;
 }
@@ -58,7 +58,7 @@ void __fastcall TForm1::MITMProxyDisconnect(TIdContext *AContext)
 
 	// displaying remote address.
 	tempStr = "Client disconnected"; TTextToDisplay *TextToDisplay =
-		new TTextToDisplay(tempStr); TextToDisplay->Notify();
+		new TTextToDisplay(Form1->RawDataDisplay, tempStr); TextToDisplay->Notify();
 
 	// release allocated buffer for the input data.
 	delete static_cast<TIdBuffer*>(AContext->Data);
@@ -78,7 +78,7 @@ void __fastcall TForm1::MITMProxyConnect(TIdContext *AContext)
 	// displaying remote address.
 	tempStr = "Attempting to connect to the remote server " +
 		MITMProxy->MappedHost + ":" + MITMProxy->MappedPort;
-	TTextToDisplay *TextToDisplay = new TTextToDisplay(tempStr);
+	TTextToDisplay *TextToDisplay = new TTextToDisplay(Form1->RawDataDisplay, tempStr);
 	TextToDisplay->Notify();
 	// delete TextToDisplay;*/
 
@@ -131,7 +131,7 @@ void __fastcall TForm1::MITMProxyExecute(TIdContext *AContext)
 		{
 			// A new TextToDisplay object must be created everytime a Notify
 			// is to be executed because it destroys itself internally.
-			TTextToDisplay *TextToDisplay = new TTextToDisplay;
+			TTextToDisplay *TextToDisplay = new TTextToDisplay(Form1->RawDataDisplay);
 			TextToDisplay->AddStringList(slDecodedLines);
 			TextToDisplay->Notify();
 		}

@@ -6,18 +6,19 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-TTextToDisplay::TTextToDisplay() {
+TTextToDisplay::TTextToDisplay(TRichEdit* inputRichEdit) {
+	workingRichEdit = inputRichEdit;
 	lineToAdd = NULL;
 	stringsToAdd = NULL;
 }
-TTextToDisplay::TTextToDisplay(String str) {
+TTextToDisplay::TTextToDisplay(TRichEdit* inputRichEdit, String str) {
+	workingRichEdit = inputRichEdit;
 	lineToAdd = str;
 	stringsToAdd = NULL;
 }
 void __fastcall TTextToDisplay::AddSingleLine(String str)
 {
 	lineToAdd = str;
-
 }
 void __fastcall TTextToDisplay::AddStringList(TStringList* strings)
 {
@@ -25,10 +26,14 @@ void __fastcall TTextToDisplay::AddStringList(TStringList* strings)
 }
 
 void __fastcall TTextToDisplay::DoNotify(){
+	
+	if(NULL != workingRichEdit)
+	{
 			// Use the input parameters here...
 		if (stringsToAdd)
-			Form1->Display->Lines->AddStrings(stringsToAdd);
+			workingRichEdit->Lines->AddStrings(stringsToAdd);
 		else if (lineToAdd != NULL) {
-			Form1->Display->Lines->Add(lineToAdd);
+			workingRichEdit->Lines->Add(lineToAdd);
 		}
+	}
 }
