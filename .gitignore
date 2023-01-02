@@ -1,5 +1,5 @@
 *.~*~
 /Win32/Debug/
 /__history/
-/__recovery/__recovery.ini
+/__recovery/
 /Win32/Release/
