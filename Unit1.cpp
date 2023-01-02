@@ -85,14 +85,6 @@ void __fastcall TForm1::MITMProxyConnect(TIdContext *AContext)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::DisplayChange(TObject *Sender)
-{
-	Display->SetFocus();
-	Display->SelStart = Display->GetTextLen();
-	Display->Perform(EM_SCROLLCARET, 0, 0);
-}
-//---------------------------------------------------------------------------
-
 bool ReadMessageData(TIdBuffer *Buffer, int &Offset, TIdBytes &Data) {
 	// has enough bytes?
 	if ((Offset + 2) > Buffer->Size)
@@ -161,4 +153,21 @@ void __fastcall TForm1::MITMProxyExecute(TIdContext *AContext)
 }
 //---------------------------------------------------------------------------
 
+void DisplayAutoScroll(TObject *Sender)
+{
+	if (NULL!=Sender)
+	{
+		TRichEdit *displayHandler = dynamic_cast<TRichEdit*>(Sender);
+		displayHandler->SetFocus();
+		displayHandler->SelStart = displayHandler->GetTextLen();
+		displayHandler->Perform(EM_SCROLLCARET, 0, 0);
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::RawDataDisplayChange(TObject *Sender)
+{
+	DisplayAutoScroll(Sender);
+}
+//---------------------------------------------------------------------------
 

@@ -38,6 +38,6 @@ Coordinates=73,78,118,58
 [MITMProxy]
 Coordinates=415,1,80,36
 
-[Display]
+[RawDataDisplay]
 Coordinates=480,10,70,36
 

@@ -102,7 +102,7 @@ object Form1: TForm1
     TabOrder = 2
     OnClick = Button1Click
   end
-  object Display: TRichEdit
+  object RawDataDisplay: TRichEdit
     Left = 24
     Top = 128
     Width = 529
@@ -117,7 +117,7 @@ object Form1: TForm1
     ScrollBars = ssBoth
     TabOrder = 3
     Zoom = 100
-    OnChange = DisplayChange
+    OnChange = RawDataDisplayChange
   end
   object MITMProxy: TIdMappedPortTCP
     Bindings = <
