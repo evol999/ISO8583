@@ -23,7 +23,7 @@ String insertSpaces(const String& input) {
 		if (i + 1 <= input.Length()) {
 			output += input[i + 1];
 			if(i + 1 != input.Length())
-			output += " ";
+				output += " ";
 		}
 	}
 	return output;
@@ -42,11 +42,12 @@ String getHexLength(int value) {
 
 // Constructor
 CDecoder::CDecoder() {
-    // Insert some key-value pairs into the map
+    // -1 in the first value means LLVAR
+	// Insert some key-value pairs into the map
     isoFields[-1] = std::make_tuple(5, "TPDU", Type::Hex);
     isoFields[0] = std::make_tuple(2, "MsgType", Type::Hex);
     isoFields[1] = std::make_tuple(8, "BitMap", Type::Binary);
-    isoFields[2] = std::make_tuple(8, "PAN", Type::BCD);
+    isoFields[2] = std::make_tuple(-1, "PAN", Type::BCD);
 	
 	
 /*002 PAN                  : "4593560001791662"
@@ -110,10 +111,19 @@ CDecoder::Type CDecoder::getTypeValue(int key) {
 // Member function to read any field
 String CDecoder::getField(String& input, int iLength) {
 	String retVal = NULL;
-
-	if(iLength*2 < input.Length())
+	int iRealLength = 0;
+	
+	if( -1 == iLength)
 	{
-		retVal = input.SubString(1, iLength*2);
+		iRealLength = input.SubString(1,2).ToInt();
+		input = input.SubString(3, input.Length());
+	}
+	else
+		iRealLength = 2*iLength;
+		
+	if(iRealLength < input.Length() && iRealLength != 0)
+	{
+		retVal = input.SubString(1, iRealLength);
 		input = input.SubString(iLength+1, input.Length());
 	}
 		

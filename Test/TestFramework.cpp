@@ -24,12 +24,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	callbackMap[0] = &Tests::test001;
 	callbackMap[1] = &Tests::test002;
 	callbackMap[2] = &Tests::test003;
-	// callbackMap[1] = &myMethod2;
-	// callbackMap[2] = &myMethod3;
+	callbackMap[3] = &Tests::test004;
 
 	// Iterate over the dictionary using an iterator
 	for (callback_map_t::iterator it = callbackMap.begin(); it != callbackMap.end(); ++it) {
-		std::cout << "Running test: " << it->first << std::endl;
+		std::cout << "Running test: " << it->first + 1 << std::endl;
 		if(it->second())
 			std::cout << "Test OK" << std::endl;
 		else
