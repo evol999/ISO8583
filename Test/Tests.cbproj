@@ -115,8 +115,12 @@
             <DependentOn>..\CDecoder.h</DependentOn>
             <BuildOrder>2</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Tests.cpp">
+        <CppCompile Include="TestFramework.cpp">
             <BuildOrder>1</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Tests.cpp">
+            <DependentOn>Tests.h</DependentOn>
+            <BuildOrder>3</BuildOrder>
         </CppCompile>
         <PCHCompile Include="TestsPCH1.h">
             <BuildOrder>0</BuildOrder>
