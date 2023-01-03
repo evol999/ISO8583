@@ -50,3 +50,9 @@ TStringList* CDecoder::formatInput(const String& input) {
 	}
 	return retVal;
 }
+
+// Member function to get the TPDU
+String CDecoder::getTPDU(String& input) {
+	// TODO: Add code to modify the input string and return the output2 string
+	return UnicodeString();
+}

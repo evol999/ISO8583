@@ -11,6 +11,9 @@ public:
 	// Function to format the input string for easy reading in the display
 	TStringList* formatInput(const String& input);
 
+	// Member function to get the TPDU
+	String getTPDU(String& input);
+
 	// Function to decode the formatted input string
 	// std::string decode(const std::string& formattedInput);
 };
