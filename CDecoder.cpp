@@ -94,31 +94,3 @@ String CDecoder::getField(String& input, int iLength) {
 		
 	return retVal;
 }
-	
-
-// Member function to get the TPDU
-String CDecoder::getTPDU(String& input) {
-	int iTPDULength = 5;
-
-	String retVal = input.SubString(1, iTPDULength*2);
-	input = input.SubString(iTPDULength+1, input.Length());
-	return retVal;
-}
-
-// Member function to get the Message Type
-String getMsgType(String& input) {
-	int iMsgTypeLength = 2;
-
-	String retVal = input.SubString(1, iMsgTypeLength*2);
-	input = input.SubString(iMsgTypeLength+1, input.Length());
-	return retVal;	
-}
-
-// Member function to get the Bitmap
-String getBitmap(String& input) {
-	int iBitmapLength = 5;
-
-	String retVal = input.SubString(1, iBitmapLength*2);
-	input = input.SubString(iBitmapLength+1, input.Length());
-	return retVal;	
-}
