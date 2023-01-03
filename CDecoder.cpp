@@ -22,6 +22,7 @@ String insertSpaces(const String& input) {
 		// and then add a space.
 		if (i + 1 <= input.Length()) {
 			output += input[i + 1];
+			if(i + 1 != input.Length())
 			output += " ";
 		}
 	}
@@ -42,9 +43,22 @@ String getHexLength(int value) {
 // Constructor
 CDecoder::CDecoder() {
     // Insert some key-value pairs into the map
-    isoFields[-1] = std::make_tuple(5, "TPDU");
-    isoFields[0] = std::make_tuple(2, "MsgType");
-    isoFields[1] = std::make_tuple(8, "BitMap");
+    isoFields[-1] = std::make_tuple(5, "TPDU", Type::Hex);
+    isoFields[0] = std::make_tuple(2, "MsgType", Type::Hex);
+    isoFields[1] = std::make_tuple(8, "BitMap", Type::Binary);
+    isoFields[2] = std::make_tuple(8, "PAN", Type::BCD);
+	
+	
+/*002 PAN                  : "4593560001791662"
+003 ProcessingCode       : "000000"
+004 TxnAmount            : "000000080000"
+011 SystemTraceNo        : "000002"
+012 TxnTime              : "104302"
+013 TxnDate              : "0402"
+037 RetRefNo             : "515151515151"
+038 AuthID               : "SALE51"
+039 ResponseCode         : "00"
+041 TerminalID           : "12345678"*/
 }
 
 
@@ -82,6 +96,17 @@ String CDecoder::getStringValue(int key) {
     }
 }
 
+// Method that takes an int key and returns the Type value associated with the key
+CDecoder::Type CDecoder::getTypeValue(int key) {
+    try {
+        // Return the second element of the tuple (the string value) associated with the key
+        return std::get<2>(isoFields.at(key));
+    } catch (const std::out_of_range& e) {
+        // If the key is not found, return an empty string
+        return Type::None;
+    }
+}
+
 // Member function to read any field
 String CDecoder::getField(String& input, int iLength) {
 	String retVal = NULL;
@@ -92,5 +117,36 @@ String CDecoder::getField(String& input, int iLength) {
 		input = input.SubString(iLength+1, input.Length());
 	}
 		
+	return retVal;
+}
+
+// Member function to format the field for visualization.
+String CDecoder::getFormattedField(String& input, Type type) {
+
+	String retVal = input;
+	
+	switch(type)
+	{
+		case Type::Binary:
+		{
+			retVal = insertSpaces(input);
+			break;
+		}
+		case Type::BCD:
+		{
+			break;
+		}
+		case Type::ASCII:
+		{
+			break;
+		}
+		case Type::None:
+		case Type::Hex:
+		default:
+		{
+			// Do nothing
+		}
+	}
+
 	return retVal;
 }
