@@ -25,6 +25,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	callbackMap[1] = &Tests::test002;
 	callbackMap[2] = &Tests::test003;
 	callbackMap[3] = &Tests::test004;
+	callbackMap[4] = &Tests::test005;
+	callbackMap[5] = &Tests::test006;
+	callbackMap[6] = &Tests::test007;
+	callbackMap[7] = &Tests::test008;
 
 	// Iterate over the dictionary using an iterator
 	for (callback_map_t::iterator it = callbackMap.begin(); it != callbackMap.end(); ++it) {

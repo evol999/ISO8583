@@ -87,5 +87,82 @@ bool Tests::test004() {
 	return formattedOutput == expected_output;  // Return true if the output is as expected, false otherwise
 }
 
+// Member function to run test005
+bool Tests::test005() {
+	int iLength;
+	CDecoder::Type type = CDecoder::Type::None;
+	
+	CDecoder decoder;  // Create an instance of the CDecoder class
+	String input = "000000000000080000000002104302040235313531353135313531353153414C4535313030313233343536373831323334353637383930313233";
+	String expected_output = "000000";
+	// 3 = PAN
+	iLength = decoder.getFieldLength(3);
+	String output = decoder.getField(input, iLength);  // Call the getTPDU method
+	type = decoder.getTypeValue(3);
+	String formattedOutput = decoder.getFormattedField(output, type);
+	std::wcout << "Expected: " << expected_output << " l: " << expected_output.Length() <<std::endl;
+	std::wcout << "Obtained: " << formattedOutput << " l: " << formattedOutput.Length() <<std::endl;
+
+	return formattedOutput == expected_output;  // Return true if the output is as expected, false otherwise
+}
+
+// Member function to run test006
+bool Tests::test006() {
+	int iLength;
+	CDecoder::Type type = CDecoder::Type::None;
+	
+	CDecoder decoder;  // Create an instance of the CDecoder class
+	String input = "000000080000000002104302040235313531353135313531353153414C4535313030313233343536373831323334353637383930313233";
+	String expected_output = "000000080000";
+	// 4 = TxnAmount
+	iLength = decoder.getFieldLength(4);
+	String output = decoder.getField(input, iLength);  // Call the getTPDU method
+	type = decoder.getTypeValue(4);
+	String formattedOutput = decoder.getFormattedField(output, type);
+	std::wcout << "Expected: " << expected_output << " l: " << expected_output.Length() <<std::endl;
+	std::wcout << "Obtained: " << formattedOutput << " l: " << formattedOutput.Length() <<std::endl;
+
+	return formattedOutput == expected_output;  // Return true if the output is as expected, false otherwise
+}
+
+// Member function to run test007
+bool Tests::test007() {
+	int iLength;
+	CDecoder::Type type = CDecoder::Type::None;
+	
+	CDecoder decoder;  // Create an instance of the CDecoder class
+	String input = "000002104302040235313531353135313531353153414C4535313030313233343536373831323334353637383930313233";
+	String expected_output = "000002";
+	// 11 = SystemTraceNo
+	iLength = decoder.getFieldLength(11);
+	String output = decoder.getField(input, iLength);  // Call the getTPDU method
+	type = decoder.getTypeValue(11);
+	String formattedOutput = decoder.getFormattedField(output, type);
+	std::wcout << "Expected: " << expected_output << " l: " << expected_output.Length() <<std::endl;
+	std::wcout << "Obtained: " << formattedOutput << " l: " << formattedOutput.Length() <<std::endl;
+
+	return formattedOutput == expected_output;  // Return true if the output is as expected, false otherwise
+}
+
+// Member function to run test008
+bool Tests::test008() {
+	int iLength;
+	CDecoder::Type type = CDecoder::Type::None;
+	
+	CDecoder decoder;  // Create an instance of the CDecoder class
+	String input = "104302040235313531353135313531353153414C4535313030313233343536373831323334353637383930313233";
+	String expected_output = "104302";
+	// 11 = SystemTraceNo
+	iLength = decoder.getFieldLength(12);
+	String output = decoder.getField(input, iLength);  // Call the getTPDU method
+	type = decoder.getTypeValue(12);
+	String formattedOutput = decoder.getFormattedField(output, type);
+	std::wcout << "Expected: " << expected_output << " l: " << expected_output.Length() <<std::endl;
+	std::wcout << "Obtained: " << formattedOutput << " l: " << formattedOutput.Length() <<std::endl;
+
+	return formattedOutput == expected_output;  // Return true if the output is as expected, false otherwise
+}
+
+
 
 

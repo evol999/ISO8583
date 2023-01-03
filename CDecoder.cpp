@@ -42,19 +42,18 @@ String getHexLength(int value) {
 
 // Constructor
 CDecoder::CDecoder() {
-    // -1 in the first value means LLVAR
+    // Key = field number, first value = field length in bytes, second value = field type
+	// -1 in the first value means LLVAR
 	// Insert some key-value pairs into the map
     isoFields[-1] = std::make_tuple(5, "TPDU", Type::Hex);
     isoFields[0] = std::make_tuple(2, "MsgType", Type::Hex);
     isoFields[1] = std::make_tuple(8, "BitMap", Type::Binary);
     isoFields[2] = std::make_tuple(-1, "PAN", Type::BCD);
-	
-	
-/*002 PAN                  : "4593560001791662"
-003 ProcessingCode       : "000000"
-004 TxnAmount            : "000000080000"
-011 SystemTraceNo        : "000002"
-012 TxnTime              : "104302"
+    isoFields[3] = std::make_tuple(3, "ProcessingCode", Type::Hex);
+    isoFields[4] = std::make_tuple(6, "TxnAmount", Type::BCD);
+    isoFields[11] = std::make_tuple(3, "SystemTraceNo", Type::BCD);
+    isoFields[12] = std::make_tuple(3, "TxnTime", Type::BCD);
+/*
 013 TxnDate              : "0402"
 037 RetRefNo             : "515151515151"
 038 AuthID               : "SALE51"
