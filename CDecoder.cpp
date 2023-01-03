@@ -39,6 +39,15 @@ String getHexLength(int value) {
 	return sTemp;
 }
 
+// Constructor
+CDecoder::CDecoder() {
+    // Insert some key-value pairs into the map
+    isoFields[-1] = std::make_tuple(5, "TPDU");
+    isoFields[0] = std::make_tuple(2, "MsgType");
+    isoFields[1] = std::make_tuple(8, "BitMap");
+}
+
+
 TStringList* CDecoder::formatInput(const String& input) {
 
 	TStringList *retVal = new TStringList;
@@ -51,14 +60,58 @@ TStringList* CDecoder::formatInput(const String& input) {
 	return retVal;
 }
 
+// Method that takes an int key and returns the int value associated with the key
+int CDecoder::getFieldLength(int key) {
+    try {
+        // Return the first element of the tuple (the int value) associated with the key
+        return std::get<0>(isoFields.at(key));
+    } catch (const std::out_of_range& e) {
+        // If the key is not found, return 0
+        return -1;
+    }
+}
+
+// Method that takes an int key and returns the string value associated with the key
+String CDecoder::getStringValue(int key) {
+    try {
+        // Return the second element of the tuple (the string value) associated with the key
+        return std::get<1>(isoFields.at(key));
+    } catch (const std::out_of_range& e) {
+        // If the key is not found, return an empty string
+        return NULL;
+    }
+}
+
+// Member function to read any field
+String CDecoder::getField(String& input, int iLength) {
+	String retVal = NULL;
+
+	if(iLength*2 < input.Length())
+	{
+		retVal = input.SubString(1, iLength*2);
+		input = input.SubString(iLength+1, input.Length());
+	}
+		
+	return retVal;
+}
+	
+
 // Member function to get the TPDU
 String CDecoder::getTPDU(String& input) {
 	int iTPDULength = 5;
 
 	String retVal = input.SubString(1, iTPDULength*2);
 	input = input.SubString(iTPDULength+1, input.Length());
-	// TODO: Add code to modify the input string and return the output2 string
 	return retVal;
+}
+
+// Member function to get the Message Type
+String getMsgType(String& input) {
+	int iMsgTypeLength = 2;
+
+	String retVal = input.SubString(1, iMsgTypeLength*2);
+	input = input.SubString(iMsgTypeLength+1, input.Length());
+	return retVal;	
 }
 
 // Member function to get the Bitmap
@@ -66,8 +119,6 @@ String getBitmap(String& input) {
 	int iBitmapLength = 5;
 
 	String retVal = input.SubString(1, iBitmapLength*2);
-	input = input.SubString(iTPDULength+1, input.Length());
-	// TODO: Add code to modify the input string and return the output2 string
+	input = input.SubString(iBitmapLength+1, input.Length());
 	return retVal;	
-	
 }

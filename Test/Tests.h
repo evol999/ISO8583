@@ -12,5 +12,7 @@ public:
 	void runTests();
 	// Member function to run test001
 	static bool test001();
+	// Member function to run test002
+	static bool test002();
 };
 #endif

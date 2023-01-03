@@ -22,6 +22,7 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	callback_map_t callbackMap;  // Declare the dictionary
 	callbackMap[0] = &Tests::test001;
+	callbackMap[1] = &Tests::test002;
 	// callbackMap[1] = &myMethod2;
 	// callbackMap[2] = &myMethod3;
 
