@@ -53,8 +53,8 @@ CDecoder::CDecoder() {
     isoFields[4] = std::make_tuple(6, "TxnAmount", Type::BCD);
     isoFields[11] = std::make_tuple(3, "SystemTraceNo", Type::BCD);
     isoFields[12] = std::make_tuple(3, "TxnTime", Type::BCD);
+    isoFields[13] = std::make_tuple(2, "TxnDate", Type::BCD);
 /*
-013 TxnDate              : "0402"
 037 RetRefNo             : "515151515151"
 038 AuthID               : "SALE51"
 039 ResponseCode         : "00"
