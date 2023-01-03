@@ -34,6 +34,6 @@ int _tmain(int argc, _TCHAR* argv[])
 			std::cout << "Test Fail" << std::endl;
 	}
     std::cout << "Press any key to continue... ";
-	getchar()
+	getchar();
 	return 0;
 }
