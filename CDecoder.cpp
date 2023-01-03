@@ -53,6 +53,21 @@ TStringList* CDecoder::formatInput(const String& input) {
 
 // Member function to get the TPDU
 String CDecoder::getTPDU(String& input) {
+	int iTPDULength = 5;
+
+	String retVal = input.SubString(1, iTPDULength*2);
+	input = input.SubString(iTPDULength+1, input.Length());
 	// TODO: Add code to modify the input string and return the output2 string
-	return UnicodeString();
+	return retVal;
+}
+
+// Member function to get the Bitmap
+String getBitmap(String& input) {
+	int iBitmapLength = 5;
+
+	String retVal = input.SubString(1, iBitmapLength*2);
+	input = input.SubString(iTPDULength+1, input.Length());
+	// TODO: Add code to modify the input string and return the output2 string
+	return retVal;	
+	
 }
