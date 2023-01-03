@@ -30,12 +30,6 @@ public:
 	String getField(String& input, int length);
 	
 
-	// Member function to get the TPDU
-	String getTPDU(String& input);
-
-	// Member function to get the Bitmap
-	String getBitmap(String& input);
-
 	// Function to decode the formatted input string
 	// std::string decode(const std::string& formattedInput);
 };

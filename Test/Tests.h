@@ -14,5 +14,7 @@ public:
 	static bool test001();
 	// Member function to run test002
 	static bool test002();
+	// Member function to run test003
+	static bool test003();
 };
 #endif
