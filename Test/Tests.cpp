@@ -18,19 +18,16 @@ void Tests::runTests() {
 	test002();
 }
 
-String Tests::vectorToString(const std::vector<int>& v) {
-  TStringStream oss;
-
-  // Iterate over the elements of the vector
-  for (int i : v) {
-    // Write the element to the output stream
-    oss << i << ", ";
-  }
-
-  // Return the string representation of the output stream
-  return oss.str();
+// Member function generete a String from a vector.
+String Tests::vectorToString(const std::vector<int>& fields)
+{
+    std::stringstream stream;
+    for (int field : fields) {
+        stream << field << " ";
+    }
+    std::string str = stream.str();
+    return String(str.c_str());
 }
-
 
 // Member function to run test001
 bool Tests::test001() {
@@ -278,18 +275,17 @@ bool Tests::test014() {
 	int iLength;
 	CDecoder::Type type = CDecoder::Type::None;
 	
+	std::vector<int> viOutput{2, 3, 4, 11, 14, 22, 23, 25, 35, 41, 42, 54, 55, 60};
+	
 	CDecoder decoder;  // Create an instance of the CDecoder class
-	String input = "703800000EC00000";
-	String expected_output = "12345678";
-	// 41 = TerminalID
-	iLength = decoder.getFieldLength(41);
-	String output = decoder.getField(input, iLength);  // Call the getTPDU method
-	type = decoder.getTypeValue(41);
-	String formattedOutput = decoder.getFormattedField(output, type);
+	String input = "7024068020C00610";
+	std::vector<int> fields = decoder.parseBitMap(input);
+	String expected_output = Tests::vectorToString(viOutput);
+	String output = Tests::vectorToString(fields);
 	std::wcout << "Expected: " << expected_output << " l: " << expected_output.Length() <<std::endl;
-	std::wcout << "Obtained: " << formattedOutput << " l: " << formattedOutput.Length() <<std::endl;
+	std::wcout << "Obtained: " << output << " l: " << output.Length() <<std::endl;
 
-	return formattedOutput == expected_output;  // Return true if the output is as expected, false otherwise
+	return output == expected_output;  // Return true if the output is as expected, false otherwise
 }
 
 

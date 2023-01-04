@@ -8,7 +8,7 @@
 #include <tuple>
 #include <sstream>
 #include <vector>
-#include <string>
+#include <System.SysUtils.hpp>
 
 class CDecoder {
 public:
@@ -39,6 +39,8 @@ public:
 	
 	// Member function to format the field for visualization.
 	String getFormattedField(String& input, Type type);
+	
+	std::vector<int> parseBitMap(const String& bitmap);
 	
 
 	// Function to decode the formatted input string

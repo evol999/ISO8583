@@ -168,27 +168,44 @@ String CDecoder::getFormattedField(String& input, Type type) {
 	return retVal;
 }
 
-std::vector<int> parseBitMap(const std::string& bitMapHex) {
-  // Initialize the output vector
-  std::vector<int> fields;
+std::vector<int> CDecoder::parseBitMap(const String& bitmap)
+{
+    std::vector<int> fields;
+	int value, high, low;
 
-  // Convert the hexadecimal string to an integer value
-  unsigned long long bitMap = std::stoull(bitMapHex, nullptr, 16);
+    int length = bitmap.Length();
+    for (int i = 1; i <= length; i+=2) {
+		String tempString = "0x";
+		// get substring
+		tempString += bitmap.SubString(i, 2);
+		value = StrToInt(tempString);
+		// high part
+		high = value & 0xF0;
+        if (high != 0) {
+			if(0x80 & high)
+				fields.push_back((i-1) * 4 + 1);
+			if(0x40 & high)
+				fields.push_back((i-1) * 4 + 2);
+			if(0x20 & high)
+				fields.push_back((i-1) * 4 + 3);
+			if(0x10 & high)
+				fields.push_back((i-1) * 4 + 4);
+		}
 
-  // Iterate over the bits in the bitmap, starting from the most significant
-  // bit and ending at the least significant bit
-  int field = 1;
-  while (bitMap > 0) {
-    // If the current bit is set, add the corresponding field number to the
-    // output vector
-    if (bitMap & 1) {
-      fields.push_back(field);
+		// low part
+		low = value & 0x0F;
+        if (low != 0) {
+			if(0x08 & low)
+				fields.push_back((i-1) * 4 + 5);
+			if(0x04 & low)
+				fields.push_back((i-1) * 4 + 6);
+			if(0x02 & low)
+				fields.push_back((i-1) * 4 + 7);
+			if(0x01 & low)
+				fields.push_back((i-1) * 4 + 8);
+            
+        }
     }
 
-    // Shift the bitmap right by one bit and increment the field number
-    bitMap >>= 1;
-    field++;
-  }
-
-  return fields;
+    return fields;
 }

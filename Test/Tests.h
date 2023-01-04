@@ -3,14 +3,17 @@
 #ifndef TestsH
 #define TestsH
 //---------------------------------------------------------------------------
+#include <vcl.h> // include the VCL header
+#include <sstream>
 #include <vector>
+
 class Tests {
 public:
     // Constructor for Tests
     Tests();
 	
     // Member function generete a String from a vector.
-	static String vectorToString(const std::vector<int>& v);
+	static String vectorToString(const std::vector<int>& fields);
     // Member function to run all the tests
 	void runTests();
 	// Member function to run test001
