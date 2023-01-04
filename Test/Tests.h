@@ -14,8 +14,6 @@ public:
 	
     // Member function generete a String from a vector.
 	static String vectorToString(const std::vector<int>& fields);
-    // Member function to run all the tests
-	void runTests();
 	// Member function to run test001
 	static bool test001();
 	// Member function to run test002
