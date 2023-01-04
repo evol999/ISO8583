@@ -9,8 +9,8 @@ public:
     // Constructor for Tests
     Tests();
 	
-    // Member function to print vectors
-	static void printVector(const std::vector<int>& v);
+    // Member function generete a String from a vector.
+	static String vectorToString(const std::vector<int>& v)
     // Member function to run all the tests
 	void runTests();
 	// Member function to run test001

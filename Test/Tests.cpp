@@ -18,10 +18,19 @@ void Tests::runTests() {
 	test002();
 }
 
-void Tests::printVector(const std::vector<int>& v) {
-  std::copy(v.begin(), v.end(), std::ostream_iterator<int>(std::cout, ", "));
-  std::cout << std::endl;
+String Tests::vectorToString(const std::vector<int>& v) {
+  TStringStream oss;
+
+  // Iterate over the elements of the vector
+  for (int i : v) {
+    // Write the element to the output stream
+    oss << i << ", ";
+  }
+
+  // Return the string representation of the output stream
+  return oss.str();
 }
+
 
 // Member function to run test001
 bool Tests::test001() {
