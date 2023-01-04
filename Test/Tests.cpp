@@ -12,12 +12,6 @@
 // Constructor for Tests
 Tests::Tests() {}
 
-// Member function to run all the tests
-void Tests::runTests() {
-	test001();
-	test002();
-}
-
 // Member function generete a String from a vector.
 String Tests::vectorToString(const std::vector<int>& fields)
 {
