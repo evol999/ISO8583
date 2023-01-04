@@ -7,6 +7,8 @@
 #include <map>
 #include <tuple>
 #include <sstream>
+#include <vector>
+#include <string>
 
 class CDecoder {
 public:
