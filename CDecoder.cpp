@@ -66,11 +66,9 @@ CDecoder::CDecoder() {
     isoFields[12] = std::make_tuple(3, "TxnTime", Type::BCD);
     isoFields[13] = std::make_tuple(2, "TxnDate", Type::BCD);
     isoFields[37] = std::make_tuple(12, "RetRefNo", Type::ASCII);
-/*
-037 RetRefNo             : "515151515151"
-038 AuthID               : "SALE51"
-039 ResponseCode         : "00"
-041 TerminalID           : "12345678"*/
+    isoFields[38] = std::make_tuple(6, "AuthID", Type::ASCII);
+    isoFields[39] = std::make_tuple(2, "ResponseCode", Type::ASCII);
+    isoFields[41] = std::make_tuple(8, "TerminalID", Type::ASCII);
 }
 
 
@@ -168,4 +166,29 @@ String CDecoder::getFormattedField(String& input, Type type) {
 	}
 
 	return retVal;
+}
+
+std::vector<int> parseBitMap(const std::string& bitMapHex) {
+  // Initialize the output vector
+  std::vector<int> fields;
+
+  // Convert the hexadecimal string to an integer value
+  unsigned long long bitMap = std::stoull(bitMapHex, nullptr, 16);
+
+  // Iterate over the bits in the bitmap, starting from the most significant
+  // bit and ending at the least significant bit
+  int field = 1;
+  while (bitMap > 0) {
+    // If the current bit is set, add the corresponding field number to the
+    // output vector
+    if (bitMap & 1) {
+      fields.push_back(field);
+    }
+
+    // Shift the bitmap right by one bit and increment the field number
+    bitMap >>= 1;
+    field++;
+  }
+
+  return fields;
 }

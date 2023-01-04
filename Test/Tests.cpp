@@ -190,7 +190,7 @@ bool Tests::test010() {
 	CDecoder decoder;  // Create an instance of the CDecoder class
 	String input = "35313531353135313531353153414C4535313030313233343536373831323334353637383930313233";
 	String expected_output = "515151515151";
-	// 13 = TxnDate
+	// 37 = RetRefNo
 	iLength = decoder.getFieldLength(37);
 	String output = decoder.getField(input, iLength);  // Call the getTPDU method
 	type = decoder.getTypeValue(37);
