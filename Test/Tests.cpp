@@ -17,6 +17,12 @@ void Tests::runTests() {
 	test001();
 	test002();
 }
+
+void Tests::printVector(const std::vector<int>& v) {
+  std::copy(v.begin(), v.end(), std::ostream_iterator<int>(std::cout, ", "));
+  std::cout << std::endl;
+}
+
 // Member function to run test001
 bool Tests::test001() {
 	int iLength;
@@ -194,6 +200,82 @@ bool Tests::test010() {
 	iLength = decoder.getFieldLength(37);
 	String output = decoder.getField(input, iLength);  // Call the getTPDU method
 	type = decoder.getTypeValue(37);
+	String formattedOutput = decoder.getFormattedField(output, type);
+	std::wcout << "Expected: " << expected_output << " l: " << expected_output.Length() <<std::endl;
+	std::wcout << "Obtained: " << formattedOutput << " l: " << formattedOutput.Length() <<std::endl;
+
+	return formattedOutput == expected_output;  // Return true if the output is as expected, false otherwise
+}
+
+// Member function to run test011
+bool Tests::test011() {
+	int iLength;
+	CDecoder::Type type = CDecoder::Type::None;
+	
+	CDecoder decoder;  // Create an instance of the CDecoder class
+	String input = "53414C4535313030313233343536373831323334353637383930313233";
+	String expected_output = "SALE51";
+	// 38 = AuthID
+	iLength = decoder.getFieldLength(38);
+	String output = decoder.getField(input, iLength);  // Call the getTPDU method
+	type = decoder.getTypeValue(38);
+	String formattedOutput = decoder.getFormattedField(output, type);
+	std::wcout << "Expected: " << expected_output << " l: " << expected_output.Length() <<std::endl;
+	std::wcout << "Obtained: " << formattedOutput << " l: " << formattedOutput.Length() <<std::endl;
+
+	return formattedOutput == expected_output;  // Return true if the output is as expected, false otherwise
+}
+
+// Member function to run test012
+bool Tests::test012() {
+	int iLength;
+	CDecoder::Type type = CDecoder::Type::None;
+	
+	CDecoder decoder;  // Create an instance of the CDecoder class
+	String input = "3030313233343536373831323334353637383930313233";
+	String expected_output = "00";
+	// 39 = ResponseCode
+	iLength = decoder.getFieldLength(39);
+	String output = decoder.getField(input, iLength);  // Call the getTPDU method
+	type = decoder.getTypeValue(39);
+	String formattedOutput = decoder.getFormattedField(output, type);
+	std::wcout << "Expected: " << expected_output << " l: " << expected_output.Length() <<std::endl;
+	std::wcout << "Obtained: " << formattedOutput << " l: " << formattedOutput.Length() <<std::endl;
+
+	return formattedOutput == expected_output;  // Return true if the output is as expected, false otherwise
+}
+
+// Member function to run test013
+bool Tests::test013() {
+	int iLength;
+	CDecoder::Type type = CDecoder::Type::None;
+	
+	CDecoder decoder;  // Create an instance of the CDecoder class
+	String input = "313233343536373831323334353637383930313233";
+	String expected_output = "12345678";
+	// 41 = TerminalID
+	iLength = decoder.getFieldLength(41);
+	String output = decoder.getField(input, iLength);  // Call the getTPDU method
+	type = decoder.getTypeValue(41);
+	String formattedOutput = decoder.getFormattedField(output, type);
+	std::wcout << "Expected: " << expected_output << " l: " << expected_output.Length() <<std::endl;
+	std::wcout << "Obtained: " << formattedOutput << " l: " << formattedOutput.Length() <<std::endl;
+
+	return formattedOutput == expected_output;  // Return true if the output is as expected, false otherwise
+}
+
+// Member function to run test014
+bool Tests::test014() {
+	int iLength;
+	CDecoder::Type type = CDecoder::Type::None;
+	
+	CDecoder decoder;  // Create an instance of the CDecoder class
+	String input = "703800000EC00000";
+	String expected_output = "12345678";
+	// 41 = TerminalID
+	iLength = decoder.getFieldLength(41);
+	String output = decoder.getField(input, iLength);  // Call the getTPDU method
+	type = decoder.getTypeValue(41);
 	String formattedOutput = decoder.getFormattedField(output, type);
 	std::wcout << "Expected: " << expected_output << " l: " << expected_output.Length() <<std::endl;
 	std::wcout << "Obtained: " << formattedOutput << " l: " << formattedOutput.Length() <<std::endl;

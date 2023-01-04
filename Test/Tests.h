@@ -3,11 +3,14 @@
 #ifndef TestsH
 #define TestsH
 //---------------------------------------------------------------------------
+#include <vector>
 class Tests {
 public:
     // Constructor for Tests
     Tests();
-
+	
+    // Member function to print vectors
+	static void printVector(const std::vector<int>& v);
     // Member function to run all the tests
 	void runTests();
 	// Member function to run test001
@@ -36,5 +39,7 @@ public:
 	static bool test012();
 	// Member function to run test013
 	static bool test013();
+	// Member function to run test014
+	static bool test014();
 };
 #endif
