@@ -6,6 +6,7 @@
 #include <vcl.h> // include the VCL header
 #include <map>
 #include <tuple>
+#include <sstream>
 
 class CDecoder {
 public:

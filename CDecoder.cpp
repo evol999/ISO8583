@@ -40,6 +40,17 @@ String getHexLength(int value) {
 	return sTemp;
 }
 
+String hexToAscii(const String& hex_string) {
+    std::stringstream ss;
+    for (int i = 1; i <= hex_string.Length(); i += 2) {
+        std::string byte = AnsiString(hex_string.SubString(i, 2)).c_str();
+        char chr = (char) strtol(byte.c_str(), NULL, 16);
+        ss << chr;
+    }
+    AnsiString ascii = ss.str().c_str();
+    return String(ascii);
+}
+
 // Constructor
 CDecoder::CDecoder() {
     // Key = field number, first value = field length in bytes, second value = field type
@@ -54,6 +65,7 @@ CDecoder::CDecoder() {
     isoFields[11] = std::make_tuple(3, "SystemTraceNo", Type::BCD);
     isoFields[12] = std::make_tuple(3, "TxnTime", Type::BCD);
     isoFields[13] = std::make_tuple(2, "TxnDate", Type::BCD);
+    isoFields[37] = std::make_tuple(12, "RetRefNo", Type::ASCII);
 /*
 037 RetRefNo             : "515151515151"
 038 AuthID               : "SALE51"
@@ -147,6 +159,7 @@ String CDecoder::getFormattedField(String& input, Type type) {
 		}
 		case Type::ASCII:
 		{
+			retVal = hexToAscii(input);
 			break;
 		}
 		case Type::None:
