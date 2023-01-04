@@ -153,10 +153,6 @@ String CDecoder::getFormattedField(String& input, Type type) {
 			retVal = insertSpaces(input);
 			break;
 		}
-		case Type::BCD:
-		{
-			break;
-		}
 		case Type::ASCII:
 		{
 			retVal = hexToAscii(input);
@@ -164,6 +160,7 @@ String CDecoder::getFormattedField(String& input, Type type) {
 		}
 		case Type::None:
 		case Type::Hex:
+		case Type::BCD:
 		default:
 		{
 			// Do nothing
