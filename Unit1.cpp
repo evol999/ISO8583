@@ -94,10 +94,13 @@ bool ReadMessageData(TIdBuffer *Buffer, int &Offset, TIdBytes &Data) {
 	UInt16 binLength = Buffer->ExtractToUInt16(Offset);
 
 	// converting from hex binary to hex string
-	String bcdLength = String().sprintf(_D("%04hx"), binLength);
+	// The message length should not be expressed in BCD, this line should not be used.
+	// String bcdLength = String().sprintf(_D("%04hx"), binLength);
 
 	// converting from hex string to int
-	int calculated_length = bcdLength.ToInt() - 2;
+	// int calculated_length = hexLength.ToInt() - 2;
+	// instead the length should be read as hex
+	int calculated_length = binLength - 2;
 
 	// has enough bytes?
 	if ((Offset + 2 + calculated_length) > Buffer->Size)
