@@ -28,8 +28,8 @@ public:
 	// Method that takes an int key and returns the int value associated with the key
 	int getFieldLength(int key);
 	
-	// Method that takes an int key and returns the string value associated with the key
-	String getStringValue(int key);
+	// Method that takes an int key and returns the desciption value associated with the key
+	String getDescValue(int key);
 
 	// Method that takes an int key and returns the Type value associated with the key
 	Type getTypeValue(int key);
@@ -40,6 +40,7 @@ public:
 	// Member function to format the field for visualization.
 	String getFormattedField(String& input, Type type);
 	
+	// Member function to get the fields to be decoded.
 	std::vector<int> parseBitMap(const String& bitmap);
 	
 

@@ -53,7 +53,10 @@ String hexToAscii(const String& hex_string) {
 
 // Constructor
 CDecoder::CDecoder() {
-    // Key = field number, first value = field length in bytes, second value = field type
+    // Key = field number,
+	// first value = field length in bytes,
+	// second value = field desciption,
+	// third value = field type,
 	// -1 in the first value means LLVAR
 	// Insert some key-value pairs into the map
     isoFields[-1] = std::make_tuple(5, "TPDU", Type::Hex);
@@ -95,8 +98,8 @@ int CDecoder::getFieldLength(int key) {
     }
 }
 
-// Method that takes an int key and returns the string value associated with the key
-String CDecoder::getStringValue(int key) {
+// Method that takes an int key and returns the desciption value associated with the key
+String CDecoder::getDescValue(int key) {
     try {
         // Return the second element of the tuple (the string value) associated with the key
         return std::get<1>(isoFields.at(key));
