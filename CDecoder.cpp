@@ -122,10 +122,13 @@ String CDecoder::getField(String& input, int iLength) {
 	String retVal = NULL;
 	int iRealLength = 0;
 	
+	// variable length
 	if( -1 == iLength)
 	{
-		iRealLength = input.SubString(1,2).ToInt();
-		input = input.SubString(3, input.Length());
+		if(input.Length()>2)
+			iRealLength = input.SubString(1,2).ToInt();
+		if(input.Length()>3)
+			input = input.SubString(3, input.Length());
 	}
 	else
 		iRealLength = 2*iLength;
@@ -135,7 +138,10 @@ String CDecoder::getField(String& input, int iLength) {
 		retVal = input.SubString(1, iRealLength);
 		input = input.SubString(iLength+1, input.Length());
 	}
-		
+	
+	// check for correct decodification
+	if("" != retVal && iRealLength != retVal.Length())
+		retVal = "";
 	return retVal;
 }
 
