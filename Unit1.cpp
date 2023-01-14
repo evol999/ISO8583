@@ -132,8 +132,13 @@ void __fastcall TForm1::MITMProxyExecute(TIdContext *AContext)
 	int offset = 0;
 	while (ReadMessageData(Buffer, offset, ucBuffer)) {
 		sTemp = String().sprintf(_D("%s"), ToHex(ucBuffer).c_str());
-		TTextToDisplay *TextToDecodedDisplay = new TTextToDisplay(Form1->DecodedDataDisplay, sTemp);
-		TextToDecodedDisplay->Notify();
+		slDecodedLines = Decoder->decodeMessage(sTemp);
+		if(slDecodedLines)
+		{
+			TTextToDisplay *TextToDecodedDisplay = new TTextToDisplay(Form1->DecodedDataDisplay);
+			TextToDecodedDisplay->AddStringList(slDecodedLines);
+			TextToDecodedDisplay->Notify();
+		}
 		slDecodedLines = Decoder->formatInput(sTemp);
 		if(slDecodedLines)
 		{
