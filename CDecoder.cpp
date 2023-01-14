@@ -265,6 +265,9 @@ bool CDecoder::insertDecodedField(int iField, String& inputStr, TStringList& str
 	CDecoder::Type type = CDecoder::Type::None;
 	String errorMessage = "Error with field: ";
 	String formattedOutput = "";
+	String fieldDescription = "";
+	String lineToAdd = "";
+	
 	
 	partialStr = "";
 	iLength = getFieldLength(iField);
@@ -279,7 +282,14 @@ bool CDecoder::insertDecodedField(int iField, String& inputStr, TStringList& str
 	{
 		type = getTypeValue(iField);
 		formattedOutput = getFormattedField(partialStr, type);
-		stringList.Add(formattedOutput);
+		fieldDescription = getFieldDesc(iField);
+		lineToAdd.sprintf(L"%03d ", iField);
+		fieldDescription.sprintf(L"%-16ls: ", fieldDescription.c_str());
+		lineToAdd += fieldDescription;
+		lineToAdd += "\"";
+		lineToAdd += formattedOutput;
+		lineToAdd += "\"";
+		stringList.Add(lineToAdd);
 	}
     return retVal;	
 	
@@ -310,7 +320,7 @@ TStringList* CDecoder::decodeMessage(String inputStr) {
 	if(!isOK)
 		return retVal;
 	
-	// use info in the TStringList no sirve porque esta formateada devolver partialStr
+	// Optional fields
 	std::vector<int> fields = parseBitMap(partialStr);
 	
 	for (int i = 0; i < fields.size(); i++) {

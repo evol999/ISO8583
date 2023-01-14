@@ -305,14 +305,15 @@ bool Tests::test015() {
 // Member function to run test016
 bool Tests::test016() {
 	int iLength;
+	int iIndex;
 
 	CDecoder decoder;  // Create an instance of the CDecoder class
 	String input = "600021000002003038078020c006b8003000000000000100000018161052032900510000002100285466050000356619d251220171904e473034383236313336393639363031303120202020200029323112303030303030303030303130321230303030303030303030303801519f260831bd32aa7c77c35b9f2701809f10120110a04001220000000000000000000000ff9f37042d0ea1ff9f36020722950500800080009a032203299c01009f02060000000001005f2a020840820239009f1a0202189f03060000000000009f3303e0f8c89f34031e03009f1e0832303034383735368407a00000000410109f090200005f3401009f0607a00000000410109f0702ff0000083030303033303030003230323130123030303030303030303030303131123030303030303030303038320006303031303031008430334d323430323030303530303033303030303030303030303030313244323630303030303030303030333030323138303030303030303030305532333032303030353030303330303030303030303030303031";
-	String expected_output = "0200";	
 	
 	TStringList *expected = new TStringList();
 	TStringList *result = new TStringList();
-	expected->Add("0200");
+	
+/* 	expected->Add("0200");
 	expected->Add("30 38 07 80 20 C0 06 B8");
 	expected->Add("003000");
 	expected->Add("000000000100");
@@ -331,23 +332,39 @@ bool Tests::test016() {
 	expected->Add("00003000");
 	expected->Add("30 32 31 30 12 30 30 30 30 30 30 30 30 30 30 30 30 31 31 12 30 30 30 30 30 30 30 30 30 30 38 32");
 	expected->Add("001001");
-	expected->Add("03M24020005000300000000000012D2600000000003002180000000000U2302000500030000000000001");
-	
+	expected->Add("03M24020005000300000000000012D2600000000003002180000000000U2302000500030000000000001"); */
+
+	expected->Add("-01 TPDU            : \"6000210000\"");
+	expected->Add("000 MsgType         : \"0200\"");
+	expected->Add("001 BitMap          : \"30 38 07 80 20 c0 06 b8\"");
+	expected->Add("003 ProcessingCode  : \"003000\"");
+	expected->Add("004 TxnAmount       : \"000000000100\"");
+	expected->Add("011 SystemTraceNo   : \"000018\"");
+	expected->Add("012 TxnTime         : \"161052\"");
+	expected->Add("013 TxnDate         : \"0329\"");
+	expected->Add("022 POSEntryMode    : \"0051\"");
+	expected->Add("023 CardSequenceNo  : \"0000\"");
+	expected->Add("024 NII             : \"0021\"");
+	expected->Add("025 POSConditionCode: \"00\"");
+	expected->Add("035 Track2          : \"5466050000356619d25122017190\"");
+	expected->Add("041 TerminalID      : \"NG048261\"");
+	expected->Add("042 AcquirerID      : \"3696960101     \"");
+	expected->Add("054 AddAmounts      : \"32 31 12 30 30 30 30 30 30 30 30 30 30 31 30 32 12 30 30 30 30 30 30 30 30 30 30 30 38\"");
+	expected->Add("055 Field55         : \"9f 26 08 31 bd 32 aa 7c 77 c3 5b 9f 27 01 80 9f 10 12 01 10 a0 40 01 22 00 00 00 00 00 00 00 00 00 00 00 ff 9f 37 04 2d 0e a1 ff 9f 36 02 07 22 95 05 00 80 00 80 00 9a 03 22 03 29 9c 01 00 9f 02 06 00 00 00 00 01 00 5f 2a 02 08 40 82 02 39 00 9f 1a 02 02 18 9f 03 06 00 00 00 00 00 00 9f 33 03 e0 f8 c8 9f 34 03 1e 03 00 9f 1e 08 32 30 30 34 38 37 35 36 84 07 a0 00 00 00 04 10 10 9f 09 02 00 00 5f 34 01 00 9f 06 07 a0 00 00 00 04 10 10 9f 07 02 ff 00\"");
+	expected->Add("057 Field57         : \"00003000\"");
+	expected->Add("059 Field59         : \"30 32 31 30 12 30 30 30 30 30 30 30 30 30 30 30 30 31 31 12 30 30 30 30 30 30 30 30 30 30 38 32\"");
+	expected->Add("060 Field60         : \"001001\"");
+	expected->Add("061 Field61         : \"03M24020005000300000000000012D2600000000003002180000000000U2302000500030000000000001\"");	
+
 	result = decoder.decodeMessage(input);
 	
 	for (int i = 0; i < result->Count; i++)
 	{
 		std::wcout << result->Strings[i] << std::endl;
 	}
-	
-	String output = "";
-	if(result->Count>0)
-		output = result->Strings[result->Count - 1];
-
-	std::wcout << "Expected: " << expected->Count <<std::endl;
-	std::wcout << "Obtained: " << result->Count <<std::endl;
-
-	return output == expected_output;  // Return true if the output is as expected, false otherwise
+	// iIndex = result->Compare(expected);
+	// return iIndex == 0;  // Return true if the output is as expected, false otherwise
+	return result->Text == expected->Text;  // Return true if the output is as expected, false otherwise
 }
 
 
