@@ -68,10 +68,22 @@ CDecoder::CDecoder() {
     isoFields[11] = std::make_tuple(3, "SystemTraceNo", Type::BCD);
     isoFields[12] = std::make_tuple(3, "TxnTime", Type::BCD);
     isoFields[13] = std::make_tuple(2, "TxnDate", Type::BCD);
+    isoFields[22] = std::make_tuple(2, "POSEntryMode", Type::BCD);
+    isoFields[23] = std::make_tuple(2, "CardSequenceNo", Type::BCD);
+    isoFields[24] = std::make_tuple(2, "NII", Type::BCD);
+    isoFields[25] = std::make_tuple(1, "POSConditionCode", Type::BCD);
+    isoFields[35] = std::make_tuple(-1, "Track2", Type::BCD);
     isoFields[37] = std::make_tuple(12, "RetRefNo", Type::ASCII);
     isoFields[38] = std::make_tuple(6, "AuthID", Type::ASCII);
     isoFields[39] = std::make_tuple(2, "ResponseCode", Type::ASCII);
     isoFields[41] = std::make_tuple(8, "TerminalID", Type::ASCII);
+    isoFields[42] = std::make_tuple(15, "AcquirerID", Type::ASCII);
+    isoFields[54] = std::make_tuple(-2, "AddAmounts", Type::Binary);
+    isoFields[55] = std::make_tuple(-2, "Field55", Type::Binary);
+    isoFields[57] = std::make_tuple(-2, "Field57", Type::ASCII);
+    isoFields[59] = std::make_tuple(-2, "Field59", Type::Binary);
+    isoFields[60] = std::make_tuple(-2, "Field60", Type::ASCII);
+    isoFields[61] = std::make_tuple(-2, "Field61", Type::ASCII);
 }
 
 
@@ -94,7 +106,7 @@ int CDecoder::getFieldLength(int key) {
         return std::get<0>(isoFields.at(key));
     } catch (const std::out_of_range& e) {
         // If the key is not found, return 0
-        return -1;
+        return 0;
     }
 }
 
@@ -105,7 +117,7 @@ String CDecoder::getDescValue(int key) {
         return std::get<1>(isoFields.at(key));
     } catch (const std::out_of_range& e) {
         // If the key is not found, return an empty string
-        return NULL;
+        return "Field not mapped";
     }
 }
 
@@ -122,24 +134,51 @@ CDecoder::Type CDecoder::getTypeValue(int key) {
 
 // Member function to read any field
 String CDecoder::getField(String& input, int iLength) {
-	String retVal = NULL;
+	String retVal = "";
 	int iRealLength = 0;
 	
 	// variable length
 	if( -1 == iLength)
 	{
 		if(input.Length()>2)
-			iRealLength = input.SubString(1,2).ToInt();
+		{
+			try
+			{
+				iRealLength = input.SubString(1,2).ToInt();
+			}
+			catch (EConvertError &e)
+			{
+				return retVal;
+			}
+		}
+			
 		if(input.Length()>3)
 			input = input.SubString(3, input.Length());
+	}
+	// variable length
+	else if( -2 == iLength)
+	{
+		if(input.Length()>4)
+		{
+			try
+			{
+				iRealLength = 2*input.SubString(1,4).ToInt();
+			}
+			catch (EConvertError &e)
+			{
+				return retVal;
+			}
+		}
+		if(input.Length()>5)
+			input = input.SubString(5, input.Length());
 	}
 	else
 		iRealLength = 2*iLength;
 		
-	if(iRealLength < input.Length() && iRealLength != 0)
+	if(iRealLength != 0 && iRealLength <= input.Length())
 	{
 		retVal = input.SubString(1, iRealLength);
-		input = input.SubString(iLength+1, input.Length());
+		input = input.SubString(iRealLength+1, input.Length());
 	}
 	
 	// check for correct decodification
@@ -223,14 +262,24 @@ bool CDecoder::insertDecodedField(int iField, String& inputStr, TStringList& str
 {
 	bool retVal = True;
 	int iLength;
+	CDecoder::Type type = CDecoder::Type::None;
 	String errorMessage = "Error with field: ";
+	String formattedOutput = "";
 	
+	partialStr = "";
 	iLength = getFieldLength(iField);
-	partialStr = getField(inputStr, iLength);  // Call the getField method
+	if(0 != iLength)
+		partialStr = getField(inputStr, iLength);  // Call the getField method
 	if("" == partialStr)
 	{
 		stringList.Add(errorMessage + iField + " " +getDescValue(iField));
 		retVal = False;
+	}
+	else
+	{
+		type = getTypeValue(iField);
+		formattedOutput = getFormattedField(partialStr, type);
+		stringList.Add(formattedOutput);
 	}
     return retVal;	
 	
