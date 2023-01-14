@@ -42,5 +42,7 @@ public:
 	static bool test013();
 	// Member function to run test014
 	static bool test014();
+	// Member function to run test015
+	static bool test015();
 };
 #endif

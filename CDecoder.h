@@ -43,6 +43,11 @@ public:
 	// Member function to get the fields to be decoded.
 	std::vector<int> parseBitMap(const String& bitmap);
 	
+	// Member function that inserts decoded field into visualization TStringList
+	bool insertDecodedField(int iField, String& inputStr, TStringList& stringList, String& partialStr);
+	// Member function to do the actual decoding
+	TStringList* decodeMessage(String inputStr);
+	
 
 	// Function to decode the formatted input string
 	// std::string decode(const std::string& formattedInput);

@@ -218,3 +218,56 @@ std::vector<int> CDecoder::parseBitMap(const String& bitmap)
 
     return fields;
 }
+
+bool CDecoder::insertDecodedField(int iField, String& inputStr, TStringList& stringList, String& partialStr)
+{
+	bool retVal = True;
+	int iLength;
+	String errorMessage = "Error with field: ";
+	
+	iLength = getFieldLength(iField);
+	partialStr = getField(inputStr, iLength);  // Call the getField method
+	if("" == partialStr)
+	{
+		stringList.Add(errorMessage + iField + " " +getDescValue(iField));
+		retVal = False;
+	}
+    return retVal;	
+	
+}
+
+TStringList* CDecoder::decodeMessage(String inputStr) {
+    TStringList* retVal = new TStringList();
+	int iField;
+	bool isOK;
+	String partialStr;
+
+	// mandatory fields
+	// try to get TPDU
+	iField = -1;
+	isOK = insertDecodedField(iField, inputStr, *retVal, partialStr);
+	if(!isOK)
+		return retVal;
+
+	// try to get MsgType
+	iField = 0;
+	isOK = insertDecodedField(iField, inputStr, *retVal, partialStr);
+	if(!isOK)
+		return retVal;
+
+	// try to get BitMap
+	iField = 1;
+	isOK = insertDecodedField(iField, inputStr, *retVal, partialStr);
+	if(!isOK)
+		return retVal;
+	
+	// use info in the TStringList no sirve porque esta formateada devolver partialStr
+	std::vector<int> fields = parseBitMap(partialStr);
+	
+	for (int i = 0; i < fields.size(); i++) {
+		isOK = insertDecodedField(fields[i], inputStr, *retVal, partialStr);
+		if(!isOK)
+			break;
+    }
+	return retVal;
+}

@@ -282,6 +282,26 @@ bool Tests::test014() {
 	return output == expected_output;  // Return true if the output is as expected, false otherwise
 }
 
+// Member function to run test015
+bool Tests::test015() {
+	int iLength;
+
+	CDecoder decoder;  // Create an instance of the CDecoder class
+	String input = "60000000";
+	String expected_output = "Error with field: -1 TPDU";	
+	
+	TStringList *result = new TStringList();
+	result = decoder.decodeMessage(input);
+	String output = "";
+	if(result->Count>0)
+		output = result->Strings[result->Count - 1];
+
+	std::wcout << "Expected: " << expected_output << " l: " << expected_output.Length() <<std::endl;
+	std::wcout << "Obtained: " << output << " l: " << output.Length() <<std::endl;
+
+	return output == expected_output;  // Return true if the output is as expected, false otherwise
+}
+
 
 
 
