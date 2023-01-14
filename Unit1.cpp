@@ -103,7 +103,7 @@ bool ReadMessageData(TIdBuffer *Buffer, int &Offset, TIdBytes &Data) {
 	// int calculated_length = hexLength.ToInt() - 2;
 	////////////////////////////////////////////////////////////////////////////
 	// instead the length should be read as hex
-	int calculated_length = binLength - 2;
+	int calculated_length = binLength;
 
 	// has enough bytes?
 	if ((Offset + 2 + calculated_length) > Buffer->Size)
