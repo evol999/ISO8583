@@ -148,6 +148,7 @@ object Form1: TForm1
     OnBeforeConnect = MITMProxyBeforeConnect
     MappedPort = 0
     OnExecute = MITMProxyExecute
+    OnOutboundData = MITMProxyOutboundData
     Left = 656
     Top = 168
   end

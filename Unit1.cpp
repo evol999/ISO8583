@@ -190,3 +190,49 @@ void __fastcall TForm1::DecodedDataDisplayChange(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm1::MITMProxyOutboundData(TIdContext *AContext)
+{
+	String sTemp;
+
+	TIdBuffer *Buffer = static_cast<TIdBuffer*>(AContext->Data);
+	Buffer->Write(static_cast<TIdMappedPortContext*>(AContext)->NetData);
+	Buffer->CompactHead();
+
+	CDecoder *Decoder = new CDecoder();
+	TStringList *slDecodedLines = NULL;
+	TIdBytes ucBuffer;
+	int offset = 0;
+	while (ReadMessageData(Buffer, offset, ucBuffer)) {
+		sTemp = String().sprintf(_D("%s"), ToHex(ucBuffer).c_str());
+		slDecodedLines = Decoder->decodeMessage(sTemp);
+		if(slDecodedLines)
+		{
+			TTextToDisplay *TextToDecodedDisplay = new TTextToDisplay(Form1->DecodedDataDisplay);
+			TextToDecodedDisplay->AddStringList(slDecodedLines);
+			TextToDecodedDisplay->Notify();
+		}
+		slDecodedLines = Decoder->formatInput(sTemp);
+		if(slDecodedLines)
+		{
+			// A new TextToDisplay object must be created everytime a Notify
+			// is to be executed because it destroys itself internally.
+			TTextToDisplay *TextToDisplay = new TTextToDisplay(Form1->RawDataDisplay);
+			TextToDisplay->AddStringList(slDecodedLines);
+			TextToDisplay->Notify();
+		}
+	}
+
+	delete Decoder;
+
+	// No need to delete TextToDisplay here it will destroy itself automatically
+	// delete TextToDisplay;
+
+	// Do not delete the slDecodedLines here because it will become NULL, no
+	// text will be "printed" and this will raise an exception.
+	// delete slDecodedLines;
+
+	if (offset > 0)
+		Buffer->Remove(offset);
+}
+//---------------------------------------------------------------------------
+
