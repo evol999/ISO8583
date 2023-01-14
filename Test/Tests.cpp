@@ -367,6 +367,197 @@ bool Tests::test016() {
 	return result->Text == expected->Text;  // Return true if the output is as expected, false otherwise
 }
 
+// Member function to run test017
+bool Tests::test017() {
+	int iLength;
+	int iIndex;
+
+	CDecoder decoder;  // Create an instance of the CDecoder class
+	String input = "60001900000220303800000a800000000000000000080000000002152028011430303030303030303030313230303132333435363738";
+	
+	TStringList *expected = new TStringList();
+	TStringList *result = new TStringList();
+	
+	expected->Add("-01 TPDU            : \"6000190000\"");
+	expected->Add("000 MsgType         : \"0220\"");
+	expected->Add("001 BitMap          : \"30 38 00 00 0a 80 00 00\"");
+	expected->Add("003 ProcessingCode  : \"000000\"");
+	expected->Add("004 TxnAmount       : \"000000080000\"");
+	expected->Add("011 SystemTraceNo   : \"000002\"");
+	expected->Add("012 TxnTime         : \"152028\"");
+	expected->Add("013 TxnDate         : \"0114\"");
+	expected->Add("037 RetRefNo        : \"000000000012\"");
+	expected->Add("039 ResponseCode    : \"00\"");
+	expected->Add("041 TerminalID      : \"12345678\"");
+
+	result = decoder.decodeMessage(input);
+	
+	if(result->Count == expected->Count)
+	{
+		for (int i = 0; i < result->Count; i++)
+		{
+			std::wcout << result->Strings[i] << std::endl;
+			std::wcout << expected->Strings[i] << std::endl;
+			if(result->Strings[i] != expected->Strings[i] )
+			{
+				std::wcout << "Strings are different" << std::endl;
+				return false;
+			}
+		}
+	}
+	else
+		return false;
+	
+	// iIndex = result->Compare(expected);
+	// return iIndex == 0;  // Return true if the output is as expected, false otherwise
+	return result->Text == expected->Text;  // Return true if the output is as expected, false otherwise
+}
+
+bool Tests::test018() {
+	int iLength;
+	int iIndex;
+	bool retVal = False;
+
+	CDecoder decoder;  // Create an instance of the CDecoder class
+	String input = "60001900000220303800000A800000000000000000080000000002152028011430303030303030303030313230303132333435363738";
+	String output = "";
+	String test = "";
+
+	// TPDU
+	iIndex = -1;
+	iLength = decoder.getFieldLength(iIndex);
+	output = decoder.getField(input, iLength);  // Call the getTPDU method
+	test = input.SubString(input.Length() - 3, 4);
+	// check for input ending
+	if("3738" != test)
+	{
+		std::wcout << "iIndex: " << iIndex <<std::endl;
+		return retVal;
+	}
+	
+	// MsgType
+	iIndex = 0;
+	iLength = decoder.getFieldLength(iIndex);
+	output = decoder.getField(input, iLength);  // Call the getTPDU method
+	test = input.SubString(input.Length() - 3, 4);
+	// check for input ending
+	if("3738" != test)
+	{
+		std::wcout << "iIndex: " << iIndex <<std::endl;
+		return retVal;
+	}
+	
+	// BitMap
+	iIndex = 1;
+	iLength = decoder.getFieldLength(iIndex);
+	output = decoder.getField(input, iLength);  // Call the getTPDU method
+	test = input.SubString(input.Length() - 3, 4);
+	// check for input ending
+	if("3738" != test)
+	{
+		std::wcout << "iIndex: " << iIndex <<std::endl;
+		return retVal;
+	}
+
+	// ProcessingCode
+	iIndex = 3;
+	iLength = decoder.getFieldLength(iIndex);
+	output = decoder.getField(input, iLength);  // Call the getTPDU method
+	test = input.SubString(input.Length() - 3, 4);
+	// check for input ending
+	if("3738" != test)
+	{
+		std::wcout << "iIndex: " << iIndex <<std::endl;
+		return retVal;
+	}
+
+	// TxnAmount
+	iIndex = 4;
+	iLength = decoder.getFieldLength(iIndex);
+	output = decoder.getField(input, iLength);  // Call the getTPDU method
+	test = input.SubString(input.Length() - 3, 4);
+	// check for input ending
+	if("3738" != test)
+	{
+		std::wcout << "iIndex: " << iIndex <<std::endl;
+		return retVal;
+	}
+
+	// SystemTraceNo
+	iIndex = 11;
+	iLength = decoder.getFieldLength(iIndex);
+	output = decoder.getField(input, iLength);  // Call the getTPDU method
+	test = input.SubString(input.Length() - 3, 4);
+	// check for input ending
+	if("3738" != test)
+	{
+		std::wcout << "iIndex: " << iIndex <<std::endl;
+		return retVal;
+	}
+
+	// TxnTime
+	iIndex = 12;
+	iLength = decoder.getFieldLength(iIndex);
+	output = decoder.getField(input, iLength);  // Call the getTPDU method
+	test = input.SubString(input.Length() - 3, 4);
+	// check for input ending
+	if("3738" != test)
+	{
+		std::wcout << "iIndex: " << iIndex <<std::endl;
+		return retVal;
+	}
+
+	// TxnDate
+	iIndex = 13;
+	iLength = decoder.getFieldLength(iIndex);
+	output = decoder.getField(input, iLength);  // Call the getTPDU method
+	test = input.SubString(input.Length() - 3, 4);
+	// check for input ending
+	if("3738" != test)
+	{
+		std::wcout << "iIndex: " << iIndex <<std::endl;
+		return retVal;
+	}
+
+	// RetRefNo
+	iIndex = 37;
+	iLength = decoder.getFieldLength(iIndex);
+	output = decoder.getField(input, iLength);  // Call the getTPDU method
+	test = input.SubString(input.Length() - 3, 4);
+	// check for input ending
+	if("3738" != test)
+	{
+		std::wcout << "iIndex: " << iIndex <<std::endl;
+		return retVal;
+	}
+
+	// ResponseCode
+	iIndex = 39;
+	iLength = decoder.getFieldLength(iIndex);
+	output = decoder.getField(input, iLength);  // Call the getTPDU method
+	test = input.SubString(input.Length() - 3, 4);
+	// check for input ending
+	if("3738" != test)
+	{
+		std::wcout << "iIndex: " << iIndex <<std::endl;
+		return retVal;
+	}
+
+/* 	// TerminalID
+	iIndex = 41;
+	iLength = decoder.getFieldLength(iIndex);
+	output = decoder.getField(input, iLength);  // Call the getTPDU method
+	test = input.SubString(input.Length() - 3, 4);
+	// check for input ending
+	if("3738" != test)
+	{
+		std::wcout << "iIndex: " << iIndex <<std::endl;
+		return retVal;
+	} */
+	retVal = True;
+	return retVal;
+}
+
 
 
 
