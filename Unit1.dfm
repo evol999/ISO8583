@@ -127,7 +127,7 @@ object Form1: TForm1
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
-    Font.Name = 'Tahoma'
+    Font.Name = 'Courier New'
     Font.Style = []
     HideScrollBars = False
     ParentFont = False
