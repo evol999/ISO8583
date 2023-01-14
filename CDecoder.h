@@ -29,7 +29,7 @@ public:
 	int getFieldLength(int key);
 	
 	// Method that takes an int key and returns the desciption value associated with the key
-	String getDescValue(int key);
+	String getFieldDesc(int key);
 
 	// Method that takes an int key and returns the Type value associated with the key
 	Type getTypeValue(int key);

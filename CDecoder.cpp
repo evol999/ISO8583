@@ -111,7 +111,7 @@ int CDecoder::getFieldLength(int key) {
 }
 
 // Method that takes an int key and returns the desciption value associated with the key
-String CDecoder::getDescValue(int key) {
+String CDecoder::getFieldDesc(int key) {
     try {
         // Return the second element of the tuple (the string value) associated with the key
         return std::get<1>(isoFields.at(key));
@@ -272,7 +272,7 @@ bool CDecoder::insertDecodedField(int iField, String& inputStr, TStringList& str
 		partialStr = getField(inputStr, iLength);  // Call the getField method
 	if("" == partialStr)
 	{
-		stringList.Add(errorMessage + iField + " " +getDescValue(iField));
+		stringList.Add(errorMessage + iField + " " + getFieldDesc(iField));
 		retVal = False;
 	}
 	else
