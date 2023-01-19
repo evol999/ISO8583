@@ -181,7 +181,7 @@ String CDecoder::getField(String& input, int iLength) {
 		retVal = input.SubString(1, iRealLength);
 		input = input.SubString(iRealLength+1, input.Length());
 	}
-	
+
 	// check for correct decodification
 	if("" != retVal && iRealLength != retVal.Length())
 		retVal = "";
@@ -328,6 +328,6 @@ TStringList* CDecoder::decodeMessage(String inputStr) {
 		isOK = insertDecodedField(fields[i], inputStr, *retVal, partialStr);
 		if(!isOK)
 			break;
-    }
+	}
 	return retVal;
 }
