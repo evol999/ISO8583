@@ -84,6 +84,7 @@ CDecoder::CDecoder() {
     isoFields[59] = std::make_tuple(-2, "Field59", Type::Binary);
     isoFields[60] = std::make_tuple(-2, "Field60", Type::ASCII);
     isoFields[61] = std::make_tuple(-2, "Field61", Type::ASCII);
+    isoFields[63] = std::make_tuple(-2, "Field63", Type::ASCII);
 }
 
 
