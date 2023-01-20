@@ -7,9 +7,9 @@
 class CLog
 {
 private:
-	String keyWord;
+	static String keyWord;
 public:
-    CLog(String str);
-    void add(String str);
+    static void add(String str);
+    static void setKeyWord(String str);
 };
 #endif

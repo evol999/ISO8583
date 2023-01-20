@@ -6,6 +6,7 @@
 #include "Unit1.h"
 #include "TTextToDisplay.h"
 #include "CDecoder.h"
+#include "Clog.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -14,6 +15,7 @@ TForm1 *Form1;
 __fastcall TForm1::TForm1(TComponent* Owner)
 	: TForm(Owner)
 {
+	CLog::setKeyWord("CRACK");
 }
 //---------------------------------------------------------------------------
 
@@ -28,10 +30,14 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 		MITMProxy->DefaultPort = Form1->EditLocalHostPort->Text.ToInt();
 		MITMProxy->Active = True;
 		Button1->Caption = "Stop";
+		CLog::add("Stop");
+		// OutputDebugString(String("Hola").c_str());
 	}
 	else {
 		MITMProxy->Active = False;
 		Button1->Caption = "Start";
+		CLog::add("Start");
+		// OutputDebugString(String("Adios").c_str());
 
 	}
 }
