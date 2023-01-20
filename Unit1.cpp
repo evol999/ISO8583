@@ -26,19 +26,22 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 		MITMProxy->MappedHost = Form1->EditRemoteHostAddress->Text;
 		MITMProxy->MappedPort = Form1->EditRemoteHostPort->Text.ToInt();
 
+		CLog::add("Remote");
+		CLog::add(EditRemoteHostAddress->Text);
+		CLog::add(EditRemoteHostPort->Text);
+
 		// Prepares the host side that receive messages from the client
 		MITMProxy->DefaultPort = Form1->EditLocalHostPort->Text.ToInt();
 		MITMProxy->Active = True;
 		Button1->Caption = "Stop";
-		CLog::add("Stop");
-		// OutputDebugString(String("Hola").c_str());
+		CLog::add("Local");
+		CLog::add(EditLocalHostPort->Text);
+		CLog::add("Started");
 	}
 	else {
 		MITMProxy->Active = False;
 		Button1->Caption = "Start";
-		CLog::add("Start");
-		// OutputDebugString(String("Adios").c_str());
-
+		CLog::add("Stopped");
 	}
 }
 //---------------------------------------------------------------------------
@@ -51,6 +54,7 @@ void __fastcall TForm1::MITMProxyBeforeConnect(TIdContext *AContext)
 	tempStr = "Received connection from " +
 		AContext->Connection->Socket->Binding->PeerIP;
 	TTextToDisplay *TextToDisplay = new TTextToDisplay(Form1->RawDataDisplay, tempStr);
+	CLog::add(tempStr);
 	TextToDisplay->Notify();
 	// delete TextToDisplay;
 }
@@ -65,7 +69,7 @@ void __fastcall TForm1::MITMProxyDisconnect(TIdContext *AContext)
 	// displaying remote address.
 	tempStr = "Client disconnected"; TTextToDisplay *TextToDisplay =
 		new TTextToDisplay(Form1->RawDataDisplay, tempStr); TextToDisplay->Notify();
-
+	CLog::add(tempStr);
 	// release allocated buffer for the input data.
 	delete static_cast<TIdBuffer*>(AContext->Data);
 	AContext->Data = NULL;
@@ -85,6 +89,7 @@ void __fastcall TForm1::MITMProxyConnect(TIdContext *AContext)
 	tempStr = "Attempting to connect to the remote server " +
 		MITMProxy->MappedHost + ":" + MITMProxy->MappedPort;
 	TTextToDisplay *TextToDisplay = new TTextToDisplay(Form1->RawDataDisplay, tempStr);
+	CLog::add(tempStr);
 	TextToDisplay->Notify();
 	// delete TextToDisplay;*/
 
